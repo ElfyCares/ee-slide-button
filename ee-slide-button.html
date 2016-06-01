@@ -1,13 +1,3 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
@@ -19,6 +9,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
 
 <!--
 Material design: [Sliders](https://www.google.com/design/spec/components/sliders.html)
@@ -46,11 +38,11 @@ Custom property | Description | Default
 ----------------|-------------|----------
 `--paper-slider-container-color` | The background color of the bar | `--paper-grey-400`
 `--paper-slider-bar-color` | The background color of the slider | `transparent`
-`--paper-slider-active-color` | The progress bar color | `--google-blue-700`
+`--paper-slider-active-color` | The progress bar color | `#72D572`
 `--paper-slider-secondary-color` | The secondary progress bar color | `--google-blue-300`
-`--paper-slider-knob-color` | The knob color | `--google-blue-700`
+`--paper-slider-knob-color` | The knob color | `#72D572`
 `--paper-slider-disabled-knob-color` | The disabled knob color | `--paper-grey-400`
-`--paper-slider-pin-color` | The pin color | `--google-blue-700`
+`--paper-slider-pin-color` | The pin color | `#72D572`
 `--paper-slider-font-color` | The pin's text color | `#fff`
 `--paper-slider-disabled-active-color` | The disabled progress bar color | `--paper-grey-400`
 `--paper-slider-disabled-secondary-color` | The disabled secondary progress bar color | `--paper-grey-400`
@@ -59,7 +51,8 @@ Custom property | Description | Default
 `--paper-slider-pin-start-color` | The color of the pin at the far left | `--paper-grey-400`
 `--paper-slider-height` | Height of the progress bar | `2px`
 `--paper-slider-input` | Mixin applied to the input in editable mode | `{}`
-
+`--slider-knob-icon` | Mixin applied to the knob icon | `{}
+`--slider-title` | Mixin applied to the slide text | `{}`
 @group Paper Elements
 @element paper-slider
 @demo demo/index.html
@@ -73,18 +66,18 @@ Custom property | Description | Default
         @apply(--layout);
         @apply(--layout-justified);
         @apply(--layout-center);
-        width: 200px;
+        width: 240px;
         cursor: default;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        --paper-progress-active-color: var(--paper-slider-active-color, --google-blue-700);
+        --paper-progress-active-color: var(--paper-slider-active-color, #72D572);
         --paper-progress-secondary-color: var(--paper-slider-secondary-color, --google-blue-300);
         --paper-progress-disabled-active-color: var(--paper-slider-disabled-active-color, --paper-grey-400);
         --paper-progress-disabled-secondary-color: var(--paper-slider-disabled-secondary-color, --paper-grey-400);
-        --calculated-paper-slider-height: var(--paper-slider-height, 32px);
+        --calculated-paper-slider-height: var(--paper-slider-height, 42px);
       }
 
       /* focus shows the ripple */
@@ -190,12 +183,34 @@ Custom property | Description | Default
         transition: transform 0.08s ease;
       }
 
+      #slideTitle {
+        position: relative;
+        top: calc(var(--slider-title-font-size, 1em)/2 + var(--calculated-paper-slider-height)/2);
+        text-align: center;
+        padding-right: 6px;
+        font-size: var(--slider-title-font-size, 1em);
+        @apply(--slider-title);
+      }
+
+      #knobIcon {
+        color: var(--paper-slider-knob-icon-color, #fff);
+        @apply(--slider-knob-icon);
+      }
+
+      #knobIconContainer {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+        width: 100%;
+      }
+
       #sliderKnobInner {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
         margin: 15px;
         width: calc(100% - 20px);
         height: calc(100% - 30px);
-        background-color: var(--paper-slider-knob-color, --google-blue-700);
-        border: 2px solid var(--paper-slider-knob-color, --google-blue-700);
+        background-color: var(--paper-slider-knob-color, #68B268);
+        border: 2px solid var(--paper-slider-knob-color, #68B268);
 
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -212,12 +227,12 @@ Custom property | Description | Default
       }
 
       .ring > #sliderKnob > #sliderKnobInner {
-        background-color: var(--paper-slider-knob-start-color, transparent);
-        border: 2px solid var(--paper-slider-knob-start-border-color, --paper-grey-400);
+        background-color: var(--paper-slider-knob-start-color, #68B268);
+        border: 2px solid var(--paper-slider-knob-start-border-color, #68B268);
       }
 
       #sliderKnobInner::before {
-        background-color: var(--paper-slider-pin-color, --google-blue-700);
+        background-color: var(--paper-slider-pin-color, #72D572);
       }
 
       .pin > #sliderKnob > #sliderKnobInner::before {
@@ -293,12 +308,12 @@ Custom property | Description | Default
       }
 
       .disabled.ring > #sliderKnob > #sliderKnobInner {
-        background-color: var(--paper-slider-knob-start-color, transparent);
-        border: 2px solid var(--paper-slider-knob-start-border-color, --paper-grey-400);
+        background-color: var(--paper-slider-knob-start-color, #68B268);
+        border: 2px solid var(--paper-slider-knob-start-border-color, #68B268);
       }
 
       paper-ripple {
-        color: var(--paper-slider-knob-color, --google-blue-700);
+        color: var(--paper-slider-knob-color, #72D572);
       }
     </style>
 
@@ -328,12 +343,18 @@ Custom property | Description | Default
         </div>
       </template>
 
+      <div id="slideTitle">[[slideTitle]]</div>
+
       <div id="sliderKnob"
         on-down="_knobdown"
         on-up="_resetKnob"
         on-track="_onTrack"
         on-transitionend="_knobTransitionEnd">
-          <div id="sliderKnobInner" value$="[[immediateValue]]"></div>
+          <div id="sliderKnobInner" value$="[[immediateValue]]">
+            <div id="knobIconContainer">
+              <iron-icon id="knobIcon" icon$="[[icon]]"></iron-icon>
+            </div>
+          </div>
       </div>
     </div>
 
@@ -459,6 +480,18 @@ Custom property | Description | Default
           type: Number,
           value: 100
         },
+
+        icon: {
+          type: String,
+          value: 'icons:check'
+        },
+
+        slideTitle: {
+          type: String,
+          value: 'Slide  →'
+        },
+          
+          
       },
 
       observers: [
@@ -500,12 +533,20 @@ Custom property | Description | Default
       },
 
       _mouseUp: function(e) {
-        if(this.value == this.max) {
-          this.active = true;
-        } else {
-          this.active = false;
-          this._slideBack();
-        }
+        this.async(function() {
+          if(this.value > (this.max - this.max * 0.1)) {
+            this.activate();
+          } else {
+            this.active = false;
+            this._slideBack();
+          }
+        }.bind(this),100);
+
+      },
+
+      _activate: function() {
+        this.active = true;
+        this.fire('active');
       },
 
       _slideBack: function() {       
