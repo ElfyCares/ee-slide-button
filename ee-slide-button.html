@@ -128,7 +128,7 @@ Custom property | Description | Default
         padding: 15px 0;
         width: 100%;
         background-color: var(--paper-slider-bar-color, transparent);
-        --paper-progress-container-color: var(--paper-slider-container-color, --paper-grey-400);
+        --paper-progress-container-color: var(--paper-slider-container-color, #72d572);
         --paper-progress-height: var(--calculated-paper-slider-height);
       }
 
@@ -189,6 +189,8 @@ Custom property | Description | Default
         text-align: center;
         padding-right: 6px;
         font-size: var(--slider-title-font-size, 1em);
+        color: #fff;
+        font-weight: 400
         @apply(--slider-title);
       }
 
@@ -207,7 +209,7 @@ Custom property | Description | Default
         @apply(--layout-horizontal);
         @apply(--layout-center);
         margin: 15px;
-        width: calc(100% - 20px);
+        width: calc(130% - 20px);
         height: calc(100% - 30px);
         background-color: var(--paper-slider-knob-color, #68B268);
         border: 2px solid var(--paper-slider-knob-color, #68B268);
