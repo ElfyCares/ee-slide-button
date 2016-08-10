@@ -492,8 +492,8 @@ Custom property | Description | Default
           type: String,
           value: 'Slide  →'
         },
-          
-          
+
+
       },
 
       observers: [
@@ -537,7 +537,7 @@ Custom property | Description | Default
       _mouseUp: function(e) {
         this.async(function() {
           if(this.value > (this.max - this.max * 0.1)) {
-            this.activate();
+            this._activate();
           } else {
             this.active = false;
             this._slideBack();
@@ -551,7 +551,7 @@ Custom property | Description | Default
         this.fire('active');
       },
 
-      _slideBack: function() {       
+      _slideBack: function() {
         this.async(function() {
           if(this.value > 0) {
             this.value--;
@@ -807,7 +807,7 @@ Custom property | Description | Default
      * Fired when the slider's immediateValue changes. Only occurs while the
      * user is dragging.
      *
-     * To detect changes to immediateValue that happen for any input (i.e.                                                          
+     * To detect changes to immediateValue that happen for any input (i.e.
      * dragging, tapping, clicking, etc.) listen for immediate-value-changed
      * instead.
      *
