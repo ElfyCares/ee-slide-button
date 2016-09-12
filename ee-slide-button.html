@@ -536,10 +536,10 @@ Custom property | Description | Default
 
       _mouseUp: function(e) {
         this.async(function() {
-          if(this.value > (this.max - this.max * 0.1)) {
+          if(this.value > (this.max - this.max * 0.15)) {
             this._activate();
           } else {
-            this.active = false;
+            this._active = false;
             this._slideBack();
           }
         }.bind(this),100);
